@@ -1,0 +1,15 @@
+CREATE DATABASE EFCORE_LojaDB
+
+USE EFCORE_LojaDB;
+
+CREATE TABLE [dbo].[Produtos] (
+    [Id] INT IDENTITY(1,1) NOT NULL,
+    [Nome] NVARCHAR(MAX),
+    [Categoria] NVARCHAR(MAX),
+    [Preco] FLOAT (53),
+    CONSTRAINT [PK_Produtos] PRIMARY KEY ([Id])
+);
+
+Abra o Pesquisador de Objetos do SQL Server no menu Exibir e clique na aba SQL Server para mostrar os servidores disponíveis em sua máquina. Abra o servidor (localdb), clique com o botão direito em cima da aba Bancos de Dados e escolha a opção Adicionar Novo Banco de Dados.
+
+Na janela de diálogo a seguir, defina como nome do banco LojaDB e aceite a sugestão do VS para a localização. Ao clicar em OK será criado o banco.
