@@ -21,14 +21,14 @@ namespace Alura.Loja.Testes.ConsoleApp
 
         private static void ExcluirUsandoEntity()
         {
-            using (var repo = new LojaContext())
+            using (var repo = new ProdutoDAOEF())
             {
-                IList<Produto> produtos = repo.Produtos.ToList();
+                IList<Produto> produtos = repo.Listar();
+
                 foreach (var p in produtos)
                 {
-                    repo.Produtos.Remove(p);
+                    repo.Remover(p);
                 }
-                repo.SaveChanges();
             }
         }
 
@@ -39,26 +39,19 @@ namespace Alura.Loja.Testes.ConsoleApp
             p.Categoria = "Filme";
             p.Preco = 17.99;
 
-            // Adicionando produto
-            using (var contexto = new LojaContext())
+            using (var contexto = new ProdutoDAOEF())
             {
-                contexto.Produtos.Add(p);
-                contexto.SaveChanges();
+                var idProdutoCriado = contexto.AdicionarRetornandoId(p);
+                var produtoCriado = contexto.ObterPorId(idProdutoCriado);
+                Console.WriteLine("Nome errado: " + produtoCriado.Nome);
+
+                produtoCriado.Nome = "Cassino Royale";
+                contexto.Atualizar(produtoCriado);
+
+                var produtoCorrigido = contexto.ObterPorId(idProdutoCriado);
+                Console.WriteLine("Nome corrigido: " + produtoCorrigido.Nome);
             }
 
-            using (var contexto = new LojaContext())
-            {
-                p.Nome = "Cassino Royale";
-                contexto.Produtos.Update(p);
-                contexto.SaveChanges();
-            }
-
-            using (var contexto = new LojaContext())
-            {
-                var produto = contexto.Produtos.Find(p.Id);
-                Console.WriteLine("Nome corrigido: " + p.Nome);
-                contexto.SaveChanges();
-            }
         }
 
         private static void GravarUsandoEntity()
@@ -68,10 +61,9 @@ namespace Alura.Loja.Testes.ConsoleApp
             p.Categoria = "Livros";
             p.Preco = 19.89;
 
-            using (var contexto = new LojaContext())
+            using (var contexto = new ProdutoDAOEF())
             {
-                contexto.Produtos.Add(p);
-                contexto.SaveChanges();
+                contexto.Adicionar(p);
             }
         }
 
@@ -90,9 +82,9 @@ namespace Alura.Loja.Testes.ConsoleApp
 
         private static void RecuperarUsandoEntity()
         {
-            using (var repo = new LojaContext())
+            using (var repo = new ProdutoDAOEF())
             {
-                IList<Produto> produtos = repo.Produtos.ToList();
+                IList<Produto> produtos = repo.Listar();
                 if(produtos.Count > 0)
                 {
                     foreach (var p in produtos)
