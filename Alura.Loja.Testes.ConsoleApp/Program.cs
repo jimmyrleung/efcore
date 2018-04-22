@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.ChangeTracking;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -16,9 +17,59 @@ namespace Alura.Loja.Testes.ConsoleApp
         {
             using (var db = new LojaContext())
             {
-                db.SaveChanges();
+                // Nesse caso o Include e o Then include fazem os joins necessários para
+                // trazer a Promoção com os produtos dessa promoção
+                var promocao = db.Promocoes
+                    .Include(p => p.Produtos)
+                    .ThenInclude(pp => pp.Produto)
+                    .First();
+
+                // Outra forma de fazer seria através da sobrecarga de include
+                // A desvantagem é que como o argumento é uma string, se o nome
+                // das propriedades mudarem esse código será quebrado
+                //var promocao = db.Promocoes.Include("Produtos.Produto").First();
+
+                // Exibe o nome dos produtos da promoção
+                foreach (var p in promocao.Produtos)
+                {
+                    Console.WriteLine(p.Produto.Nome);
+                }
+
+                // Nesse caso o entity irá gerar um LEFT JOIN pois o endereço não é obrigatório
+                var cliente = db.Clientes.Include(c => c.EnderecoDeEntrega).FirstOrDefault();
+                Console.WriteLine(cliente.EnderecoDeEntrega.Logradouro);
             }
+
+            System.Threading.Thread.Sleep(10000);
         }
+
+        // Modelo para criar nova promoção com produtos
+        //static void Main(string[] args)
+        //{
+        //    using (var db = new LojaContext())
+        //    {
+        //        Categoria c = new Categoria() { Nome = "Bebidas" };
+        //        IList<Produto> produtos = new List<Produto>()
+        //        {
+        //            new Produto() { Categoria = c, Nome = "Vinho", PrecoUnitario = 39.99, UnidadeMedida = "ml" },
+        //            new Produto() { Categoria = c, Nome = "Cerveja", PrecoUnitario = 3.39, UnidadeMedida = "ml" },
+        //            new Produto() { Categoria = c, Nome = "Refrigerante", PrecoUnitario = 4.09, UnidadeMedida = "ml" },
+        //            new Produto() { Categoria = c, Nome = "Água", PrecoUnitario = 1.19, UnidadeMedida = "ml" },
+        //            new Produto() { Categoria = c, Nome = "Suco", PrecoUnitario = 2.89, UnidadeMedida = "ml" },
+        //        };
+
+        //        Promocao promocaoDeBebidas = new Promocao() { descricao = "Promoção de Bebidas", dataInicio = DateTime.Now, dataFim = DateTime.Now.AddDays(7) };
+
+        //        foreach (var p in produtos)
+        //        {
+        //            promocaoDeBebidas.IncluirProduto(p);
+        //        }
+
+        //        db.Promocoes.Add(promocaoDeBebidas);
+
+        //        db.SaveChanges();
+        //    }
+        //}
 
         // Aula 7 - Relacionamento 1 para 1
         //static void Main(string[] args)
@@ -151,7 +202,7 @@ namespace Alura.Loja.Testes.ConsoleApp
             using (var repo = new ProdutoDAOEF())
             {
                 IList<Produto> produtos = repo.Listar();
-                if(produtos.Count > 0)
+                if (produtos.Count > 0)
                 {
                     foreach (var p in produtos)
                     {
