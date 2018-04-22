@@ -173,6 +173,8 @@
   <ItemGroup>
     <Compile Include="AulaChangeTracker.cs" />
     <Compile Include="Categoria.cs" />
+    <Compile Include="Cliente.cs" />
+    <Compile Include="Endereco.cs" />
     <Compile Include="IProdutoDAO.cs" />
     <Compile Include="LojaContext.cs" />
     <Compile Include="Migrations\20180419234413_Inicial.cs" />
@@ -187,11 +189,21 @@
     <Compile Include="Migrations\20180422200817_CategoriaDeProduto.designer.cs">
       <DependentUpon>20180422200817_CategoriaDeProduto.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20180422211116_PromocaoProduto.cs" />
+    <Compile Include="Migrations\20180422211116_PromocaoProduto.designer.cs">
+      <DependentUpon>20180422211116_PromocaoProduto.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180422215517_clienteEndereco.cs" />
+    <Compile Include="Migrations\20180422215517_clienteEndereco.designer.cs">
+      <DependentUpon>20180422215517_clienteEndereco.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\LojaContextModelSnapshot.cs" />
     <Compile Include="Produto.cs" />
     <Compile Include="ProdutoDAO.cs" />
     <Compile Include="ProdutoDAOEF.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Promocao.cs" />
+    <Compile Include="PromocaoProduto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlLoggerProvider.cs" />
   </ItemGroup>
