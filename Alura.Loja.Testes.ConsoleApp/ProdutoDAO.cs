@@ -97,7 +97,7 @@ namespace Alura.Loja.Testes.ConsoleApp
                 Produto p = new Produto();
                 p.Id = Convert.ToInt32(resultado["Id"]);
                 p.Nome = Convert.ToString(resultado["Nome"]);
-                p.Categoria = Convert.ToString(resultado["Categoria"]);
+                //p.Categoria = Convert.ToString(resultado["Categoria"]);
                 p.PrecoUnitario = Convert.ToDouble(resultado["Preco"]);
                 lista.Add(p);
             }

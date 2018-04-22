@@ -12,9 +12,16 @@ namespace Alura.Loja.Testes.ConsoleApp
 {
     class Program
     {
+        // Aula 5 - Relacionamento 1 para N
         static void Main(string[] args)
         {
-
+            Categoria c = new Categoria() { Nome = "Filmes" };
+            Produto p = new Produto() { Categoria = c, Nome = "007 - Cassino Royale", PrecoUnitario = 19.99, UnidadeMedida = "Unidade" };
+            using (var db = new LojaContext())
+            {
+                db.Produtos.Add(p);
+                db.SaveChanges();
+            }
         }
 
         /* Aula 1 e 2 - CRUD */
@@ -46,7 +53,7 @@ namespace Alura.Loja.Testes.ConsoleApp
         {
             Produto p = new Produto();
             p.Nome = "Cassino Royalr";
-            p.Categoria = "Filme";
+            //p.Categoria = "Filme";
             p.PrecoUnitario = 17.99;
 
             using (var contexto = new ProdutoDAOEF())
@@ -68,7 +75,7 @@ namespace Alura.Loja.Testes.ConsoleApp
         {
             Produto p = new Produto();
             p.Nome = "Percy Jackson: O Ladrão de Raios";
-            p.Categoria = "Livros";
+            //p.Categoria = "Livros";
             p.PrecoUnitario = 19.89;
 
             using (var contexto = new ProdutoDAOEF())
@@ -81,7 +88,7 @@ namespace Alura.Loja.Testes.ConsoleApp
         {
             Produto p = new Produto();
             p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
+            //p.Categoria = "Livros";
             p.PrecoUnitario = 19.89;
 
             using (var repo = new ProdutoDAO())

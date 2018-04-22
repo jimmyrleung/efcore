@@ -4,9 +4,10 @@
     {
         public int Id { get; internal set; }
         public string Nome { get; internal set; }
-        public string Categoria { get; internal set; }
         public double PrecoUnitario { get; internal set; }
         public string UnidadeMedida { get; internal set; }
+        public Categoria Categoria { get; internal set; }
+        public int CategoriaId { get; set; }
 
         public override string ToString()
         {

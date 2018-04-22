@@ -172,6 +172,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AulaChangeTracker.cs" />
+    <Compile Include="Categoria.cs" />
     <Compile Include="IProdutoDAO.cs" />
     <Compile Include="LojaContext.cs" />
     <Compile Include="Migrations\20180419234413_Inicial.cs" />
@@ -181,6 +182,10 @@
     <Compile Include="Migrations\20180419234512_produto-1.cs" />
     <Compile Include="Migrations\20180419234512_produto-1.designer.cs">
       <DependentUpon>20180419234512_produto-1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\20180422200817_CategoriaDeProduto.cs" />
+    <Compile Include="Migrations\20180422200817_CategoriaDeProduto.designer.cs">
+      <DependentUpon>20180422200817_CategoriaDeProduto.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\LojaContextModelSnapshot.cs" />
     <Compile Include="Produto.cs" />
